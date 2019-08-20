@@ -53,9 +53,9 @@ pipeline{
 			script{
 				withSonarQubeEnv ('SonarQubeServer'){
 					withCredentials([usernamePassword(credentialsId: 'Sonarqube_creds', passwordVariable: 'password', usernameVariable: 'username')]){
-						powershell 'dotnet ${env:SonarScanner} begin /key:${projectKey} /d:sonar.login=${username} /d:sonar.password=${password}'
+						powershell 'dotnet ${env:SonarScanner} begin /key:${projectKey} /d:sonar.login="${username}" /d:sonar.password="${password}"'
 						powershell 'dotnet build'
-						powershell 'dotnet ${env:SonarScanner} end /d:sonar.login=${username} /d:sonar.password=${password}'
+						powershell 'dotnet ${env:SonarScanner} end /d:sonar.login="${username}" /d:sonar.password="${password}"'
 					}
 				}
 			}
