@@ -47,20 +47,14 @@ pipeline{
                 }
             }
             
-         stage('Code Analysis'){
-		    steps{
-			echo 'SonarQube Code Analysis'
-			script{
-				withSonarQubeEnv ('SonarQubeServer'){
-					withCredentials([usernamePassword(credentialsId: 'Sonarqube_creds', passwordVariable: 'password', usernameVariable: 'username')]){
-						powershell 'dotnet ${env:SonarScanner} begin /key:${projectKey} /d:sonar.login="${username}" /d:sonar.password="${password}"'
-						powershell 'dotnet build'
-						powershell 'dotnet ${env:SonarScanner} end /d:sonar.login="${username}" /d:sonar.password="${password}"'
-					}
-				}
-			}
-		}
-	}
+        
+	     stage('Sonarqube analysis'){
+            steps {
+                powershell 'dotnet ${env:SonarScanner} begin /k:"newfirstapi" /d:sonar.host.url="${env:SonarQubeServer}" /d:sonar.login="${env:SONARQUBE_TOKEN}"'
+                powershell 'dotnet build'
+                powershell 'dotnet ${env:SonarScanner} end /d:sonar.login="${env:SONARQUBE_TOKEN}"'
+            }
+        }
             stage('Publish'){
                 steps{
                      powershell 'dotnet publish -c RELEASE -o Publish'
