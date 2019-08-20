@@ -1,0 +1,5 @@
+C:\Users\ahari\source\repos\FirstApi\FirstApiFixtures\bin\Debug\netcoreapp2.2\FirstApi.dll
+C:\Users\ahari\source\repos\FirstApi\FirstApiFixtures\obj\Debug\netcoreapp2.2\FirstApiFixtures.csprojAssemblyReference.cache
+C:\Users\ahari\source\repos\FirstApi\FirstApiFixtures\obj\Debug\netcoreapp2.2\FirstApiFixtures.csproj.CoreCompileInputs.cache
+C:\Users\ahari\source\repos\FirstApi\FirstApiFixtures\obj\Debug\netcoreapp2.2\FirstApiFixtures.AssemblyInfoInputs.cache
+C:\Users\ahari\source\repos\FirstApi\FirstApiFixtures\obj\Debug\netcoreapp2.2\FirstApiFixtures.AssemblyInfo.cs
