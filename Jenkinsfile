@@ -27,7 +27,11 @@ pipeline{
 
              string( name: 'tag_name',
                      defaultValue: "api_tag",
+                      description: '')     
+            string( name: 'projectKey',
+                     defaultValue: "firstapi",
                       description: '')                        
+                             
 
         }
 
@@ -42,7 +46,21 @@ pipeline{
                     powershell 'dotnet test'
                 }
             }
-
+            
+         stage('Code Analysis'){
+		    steps{
+			echo 'SonarQube Code Analysis'
+			script{
+				withSonarQubeEnv ('SonarQubeServer'){
+					withCredentials([usernamePassword(credentialsId: 'Sonarqube_creds', passwordVariable: 'password', usernameVariable: 'username')]){
+						powershell 'dotnet ${SonarScanner} begin /key:${projectKey} /d:sonar.login=${username} /d:sonar.password=${password}'
+						powershell 'dotnet build'
+						powershell 'dotnet ${SonarScanner} end /d:sonar.login=${username} /d:sonar.password=${password}'
+					}
+				}
+			}
+		}
+	}
             stage('Publish'){
                 steps{
                      powershell 'dotnet publish -c RELEASE -o Publish'
